@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="The best YouTube to MP4 video downloader. AMP4 YouTube downloader is free and safe to use, without ads. No login required.">
+<link rel="icon" href="favicon.png" type="image/x-icon">
+
+<meta property="og:title" content="AMP4 YouTube to MP4 converter"/>
+<meta property="og:description" content="Convert and download your favourite videos and playlists to MP4 for free.">
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://amp4.cc"/>
+<meta property="og:image" content="https://amp4.cc/amp4-logo-og.jpg"/>
+
+<meta name="twitter:title" content="AMP4 YouTube to MP4 converter">
+<meta name="twitter:description" content="Convert and download your favourite videos and playlists to MP4 for free.">
+<meta name="twitter:image" content="https://amp4.cc/amp4-logo-og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="stylesheet" href="styles/reset.css">
+<link rel="stylesheet" href="styles/main.css">
+<link rel="preload" href="fonts/Ubuntu-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Ubuntu-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<script src="script/main.js"></script>
+<script src="script/theme.js"></script>
+<script defer src="https://stat.amp3.cc/script.js" data-website-id="23a61497-4cde-4f1d-8159-116036cebf90"></script>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=6696fed53ca64b0019342bf2&product=inline-share-buttons&source=platform" async="async"></script>
+    <title>YouTube video to MP4 converter and downloader - AMP4</title>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeTC-IpAAAAAJKC9ie6r7RLQRXMt2KDdyFgEYkV"></script>
+		<style>
+h1{
+	font-size: 20px;
+}
+h2{
+	font-size: 20px;
+	font-weight: bold;
+}
+ol{
+	list-style-type: decimal;
+}
+.note{
+	padding: 10px 20px;
+	background-color: var(--note-background);
+	margin-bottom: 40px;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	line-height: 1.2em;
+}
+.note img{
+	filter: var(--conversion-image-processing);
+	margin-right: 10px;
+	width: 20px;
+}
+.note a{
+	color: var(--text-color);
+}
+.converter-box{
+  background-color: var(--converter-box-background);
+  box-shadow: var(--converter-box-shadow);
+  padding: 50px 20px 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  height: 250px;
+}
+.converter-box.noheight{
+	height: unset;
+}
+#conversion-processing, #download-processing{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	row-gap: 20px;
+}
+#conversion-processing .animation-box, #download-processing .animation-box{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 36px;
+	gap: 20px;
+	letter-spacing: 0.1em;
+}
+#conversion-processing .card-title, #download-processing .card-title{
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+	margin-bottom: 5px;
+}
+#conversion-processing .card-duration, #download-processing .card-duration{
+	opacity: 0.7;
+}
+@keyframes card{
+  from{
+    transform: matrix(1.00,0.02,0.02,1.00,0,0);
+  }
+  to{
+    transform: matrix(1.00,-0.02,-0.02,1.00,0,0);
+  }
+}
+#conversion-processing .animation-box span, #download-processing .animation-box span{
+	margin-top: 5px;
+}
+#conversion-processing .animation-box img, #download-processing .animation-box img{
+	filter: var(--conversion-image-processing);
+	animation: rotation 1.5s infinite linear;
+}
+#conversion-processing-card, #download-processing-card{
+	width: 300px;
+  height: 80px;
+	padding: 15px 30px;
+	display: grid;
+	justify-content: left;
+	grid-template-areas: 
+    "thumb title"
+    "thumb duration";
+	color: var(--text-color);
+	background-color: var(--conversion-card-background);
+	box-shadow: var(--conversion-shadow);
+	text-align: center;
+	animation: card;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	animation-direction: alternate;
+}
+.card-title{
+	grid-area: title;
+	text-align: left;
+}
+.card-title .content{
+	display: inline-block;
+}
+.card-duration{
+	grid-area: duration;
+	text-align: left;
+}
+.card-thumbnail{
+	grid-area: thumb;
+	width: 80px;
+	height: 100%;
+  margin-right: 10px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.card-title.empty{
+	height: 20px;
+	width: 150px;
+}
+.card-duration.empty{
+	height: 20px;
+	width: 70px;
+}
+.card-title.empty, .card-duration.empty, .card-thumbnail.empty{
+  background-color: var(--card-empty-background);
+}
+#conversion-finished{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 20px;
+}
+#conversion-finished h1{
+	text-align: center;
+	font-weight: 500;
+	margin-bottom: 0;
+}
+#conversion-finished-buttons{
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+a.button{
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	text-decoration: none;
+	color: #fff;
+	background-color: #344bdd;
+	padding: 15px;
+	border-radius: 5px;
+	font-size: 16px;
+}
+a.button:hover{
+	background-color: #344bddbb;
+}
+a.button.coffee{
+	background-color: #e88400;
+}
+a.button.coffee:hover{
+	background-color: #e88400bb;
+}
+a.button img{
+	filter: invert(100%) sepia(0%) saturate(7439%) hue-rotate(185deg) brightness(107%) contrast(95%);
+}
+
+	/*Input and buttons*/
+.converter-input-box.hidden,
+#conversion-options.hidden,
+.converter-alert.hidden,
+.quality-select-box.hidden #quality-select-list,
+#conversion-finished.hidden,
+#conversion-processing.hidden,
+#download-processing.hidden,
+.qualities-box.hidden, #mp4-qualities.hidden, #webm-qualities.hidden{
+	display: none;
+}
+
+.converter-input-box{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	width: 100%;
+}
+.converter-quality-button{
+	display: flex;
+	justify-content: center;
+	column-gap: 15px;
+}
+.converter-input{
+	position: relative;
+	width: 100%;
+	max-width: 600px;
+}
+.converter-alert{
+	height: 0;
+	display: flex;
+	justify-content: center;
+}
+.alert-text.finished{
+	background-color: #dc8d14;
+	margin-top: 22px;
+}
+.alert-text{
+	display: flex;
+  align-items: center;
+  padding: 20px;
+	margin-top: 7px;
+	background-color: #DC143C;
+	border-radius: 20px;
+	color: #f8f8f8;
+}
+.input-text{
+	height: 0;
+	font-size: 15px;
+}
+.input-text span{
+	position: absolute;
+	top: -22px;
+}
+#input-url{
+	font-family: Ubuntu, sans-serif;
+	width: 100%;
+	padding: 15px;
+	font-size: 18px;
+	border: none;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+#input-url:focus{
+	outline: none;
+}
+.button{
+	font-family: Ubuntu, sans-serif;
+	background-color: transparent;
+	color: #fff;
+	border: none;
+	text-transform: uppercase;
+	font-size: 18px;
+	letter-spacing: 1px;
+}
+.converter-button-container{
+	display: flex;
+	background-color: #344bdd;
+	padding: 15px;
+	border-radius: 5px;
+}
+.converter-button-container img{
+	filter: invert(100%) sepia(0%) saturate(7439%) hue-rotate(185deg) brightness(107%) contrast(95%);
+}
+.converter-button-container:hover{
+	cursor: pointer;
+	background-color: #344bddbb;
+}
+a.button.convert-another:hover img{
+	transform: rotate(180deg);
+	transition-duration: 500ms;
+}
+.button:hover{
+	cursor: pointer;
+}
+.content-second{
+	width: 100%;
+	max-width: 600px;
+	text-align: center;
+	margin-top: 100px;
+}
+.content-second p, .content-second ol{
+	line-height: 1.6em;
+	letter-spacing: 0.1em;
+}
+.content-second ol{
+	padding-left: 1em;
+}
+.content-second ol li{
+	margin-bottom: 20px;
+}
+.content-second > div{
+	margin-bottom: 50px;
+}
+.content-second p a{
+	color: var(--text-color);
+}
+/**/
+.conversion-info-card{
+	overflow: hidden;
+	max-width: 500px;
+	display: grid;
+	grid-template-areas: 
+  "thumb title"
+  "thumb uploader"
+  "thumb duration";
+  margin-bottom: 30px;
+}
+.conversion-info-image{
+	grid-area: thumb;
+	width: 120px;
+	height: 100%;
+  margin-right: 10px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.conversion-info-title{
+	overflow: hidden;
+	grid-area: title;
+	margin-bottom: 0;
+}
+.conversion-info-title .content{
+	display: inline-block;
+	white-space: nowrap;
+}
+.conversion-info-uploader{
+	grid-area: uploader;
+}
+.conversion-info-duration{
+	grid-area: duration;
+}
+.download-format-options{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 20px;
+	margin-bottom: 30px;
+}
+.download-format-option{
+	padding: 15px 30px;
+	font-size: 20px;
+	border: 2px solid #344bdd;	
+}
+.download-format-option:not(.selected):hover{
+	cursor: pointer;
+	background-color: #344bdd;
+	color: #fff;
+}
+.download-format-option.selected{
+	background-color: #344bdd;
+	color: #fff;
+}
+.download-format-qualities{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 30px;
+	background-color: var(--format-qualities-background);
+	box-shadow: var(--format-qualities-shadow);
+}
+.qualities-descripton{
+	font-size: 16px;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+.qualities-box{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	row-gap: 10px;
+	width: 100%;
+	max-width: 300px;
+}
+.download-format-quality{
+	color: #fff;
+	width: 100%;
+	background-color: #344bdd;	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+	font-size: 20px;
+	column-gap: 10px;
+}
+.download-format-quality:hover{
+	cursor: pointer;
+	background-color: #344bddbb;
+}
+.download-format-quality img{
+	filter:brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(123deg) brightness(103%) contrast(102%);
+	width: 25px;
+}
+/*Quality select display*/
+.quality-select-box{
+	position: relative;
+}
+#quality-select-display{
+	display: flex;
+	height: 100%;
+	min-width: 110px;
+	justify-content: space-between;
+	border: var(--options-border);
+	border-radius: 5px;
+	padding: 15px 15px;
+	font-size: 18px;
+	background-color: var(--options-display);
+	color: var(--text-color-options);
+}
+#quality-select-display:hover{
+	cursor: pointer;
+}
+#quality-select-list{
+	position: absolute;
+	background-color: var(--options-background);
+	padding: 15px 0;
+	top: 60px;
+	width: 150px;
+	border-radius: 15px;
+	box-shadow: var(--options-shadow);
+}
+.quality-select-options{
+	display: flex;
+	justify-content: center;
+	padding: 15px 20px;
+	background-color: var(--options-background);
+	font-size: 17px;
+}
+.quality-select-options.active:hover{
+	background-color: var(--options-list-active);
+}
+.quality-select-options.active{
+	background-color: var(--options-list-active);
+}
+.quality-select-options:hover{
+	cursor: pointer;
+	background-color: var(--options-list-hover);
+}
+#dropdown-icon-quality{
+	filter: var(--options-icon-filter);
+}
+.quality-select-box #dropdown-icon-quality{
+	transform: rotate(180deg);
+}
+.quality-select-box.hidden #dropdown-icon-quality{
+	transform: rotate(0deg);
+}
+/*ANIMATIONS*/
+@keyframes rotation{
+  from{
+    transform: rotate(359deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
+.grecaptcha-badge {
+	visibility: hidden;
+}
+/*FOR MOBILE / RESPONSIVE*/
+@media (max-width: 750px){
+	#conversion-processing{
+		padding-bottom: 10px;
+	}
+	#conversion-finished h1{
+		margin: 0;
+	}
+	 	#conversion-finished-buttons{
+		flex-direction: column;
+		gap: 10px;
+		align-items: center;
+	}
+	.converter-box{
+		padding: 0;
+		background-color: transparent;
+		box-shadow: none;
+		height: unset;
+	}
+	.converter-input-box{
+		margin-top: 40px;
+		flex-direction: column;
+	}
+	.converter-quality-button{
+		width: 100%;
+	}
+	.converter-button-container{
+		width: 100%;
+		justify-content: center;
+	}
+	.converter-input{
+		max-width: 100%;
+	}
+	.alert-text{
+		margin-top: 90px;
+	}
+	.alert-text.finished{
+		margin-top: 0;
+	}
+	.input-text span{
+		font-weight: 300;
+	}
+	.quality-select-box .input-text span{
+		position: absolute;
+		z-index: 1;
+		top: -10px;
+		left: 13px;
+		padding: 0 5px;
+		background-color: var(--converter-box-background);
+	}
+	#conversion-processing .animation-box, #download-processing .animation-box{
+		flex-direction: column;
+	}
+	#conversion-processing .animation-box span, #download-processing .animation-box span{
+		text-align: center;
+	}
+}
+#quality-select-display-value{
+	display: flex;
+	align-items: center;
+}
+@media (max-width: 400px){
+	#conversion-processing .animation-box{
+		font-size: 28px;
+	}
+	#conversion-processing-card{
+		padding: 10px 10px;
+	}
+	.card-thumbnail{
+		width: 120px;
+	}
+	.note{
+		flex-direction: column;
+	}
+	.note img{
+		margin: 5px;
+	}
+}
+.image-dark.hidden{
+  display: none;
+}
+.image-light.hidden{
+  display: none;
+}
+.reddit{
+	display: flex;
+  margin-bottom: 40px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 20px;
+}
+.reddit div{
+	font-size: 20px;
+}
+.reddit a{
+	color: #fff; 
+	background-color: #FF5700; 
+	padding: 10px 20px;
+	letter-spacing: 0.05em;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 5px;
+}
+.conversion-finished-notice{
+	text-align: center;
+	color: var(--text-color);
+}
+</style>
+  </head>
+  <body>
+  	<div class="signup-box hidden">
+    	<div class="signup-popup">
+    		<img class="close-popup-services" src="close-icon.svg">
+    		<div class="signup-popup-title">Coming Soon!</div>
+    		<div class="signup-popup-description">Join the WaitList to get the early access, benefits and more!</div>
+    		<form id="signup-form">
+	    		<label>
+	    			Enter your email address
+		    		<input id="signup-email" type="email">
+		    	</label>
+	    		<input id="signup-submit" value="Join WaitList!" type="submit">
+	    	</form>
+	    	<div id="signup-message"></div>
+    	</div>
+   	</div>
+  	<style>
+
+  		.signup-popup img{
+  			position: absolute;
+  			top: 15px;
+  			right: 15px;
+  			width: 15px;
+  			height: 15px;
+  			filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(328deg) brightness(103%) contrast(101%);
+  		}
+  		.signup-popup img:hover{
+  			cursor: pointer;
+  		}
+  		#signup-form{
+  			width: 100%;
+  			max-width: 400px;
+  		}
+  		#signup-form label{
+  			display: flex;
+  			flex-direction: column;
+  			text-align: left;
+  			color: #c8c8c8;
+  		}
+  		.signup-box{
+  			z-index: 100;
+  			display: flex;
+  			align-items: center;
+  			justify-content: center;
+  			position: fixed;
+  			width: 100%;
+  			height: 100%;
+  			background-color: #121212ba;
+  			text-align: center;
+  		}
+  		.signup-box.hidden{
+  			display: none;
+  		}
+  		.signup-popup{
+  			position: relative;
+  			padding: 30px;
+  			display: flex;
+  			align-items: center;
+  			justify-content: center;
+  			flex-direction: column;
+  			background-color: #343434;
+  			margin: 0 10px;
+  		}
+  		.signup-popup-title{
+  			font-size: 24px;
+  			margin-bottom: 20px;
+  		}
+  		.signup-popup-description{
+  			font-size: 18px;
+  			margin-bottom: 40px;
+  		}
+  		#signup-email{
+  			font-size: 20px;
+  			padding: 10px 20px;
+  			margin-bottom: 15px;
+  			margin-top: 5px;
+  			border: none;
+  			outline: none;
+  			width: 100%;
+  			max-width: 400px;
+  			color: #fff;
+  			border: none;
+  			border-bottom: 1px solid #fff;
+  			background-color: #434343;
+  		}
+  		#signup-submit{
+  			letter-spacing: 1px;
+  			font-size: 20px;
+  			padding: 10px 20px;
+  			color: #fff;
+  			background-color: #dd3474;
+  			border-radius: 5px;
+  			border: none;
+  			outline: none;
+  		}
+  		#signup-submit:hover{
+  			cursor: pointer;
+  			background-color: #e25288;
+  		}
+  		#signup-message{
+  			margin-top: 10px;
+  		}
+  	</style>
+  	<header>
+			<div id="theme-button">Dark Theme</div>
+			<a href="https://amp4.cc" class="image-light"><img class="site-logo" alt="Website logo" src="amp4-site-logo.png"></a>
+			<a href="https://amp4.cc" class="image-dark hidden"><img class="site-logo" alt="Website logo" src="amp4-site-logo-dark.png"></a>
+  	</header>
+    <main>
+    	<section class="main-content content-first">
+    		<div class="reddit">
+	    		<div>Join us on reddit:</div>
+	    		<a href="https://www.reddit.com/r/ampcc/" target="_blank">r/ampcc</a>
+	    	</div>
+	    	<div class="x">
+	    		<div>Join us on X:</div>
+	    		<a href="https://x.com/amp_convert" target="_blank">@amp_convert</a>
+	    	</div>
+	    	<style>
+	    		.reddit{
+	    			margin-bottom: 10px;
+	    		}
+	    		.x{
+					  display: flex;
+					  margin-bottom: 40px;
+					  justify-content: center;
+					  align-items: center;
+					  flex-wrap: wrap;
+					  row-gap: 10px;
+					  column-gap: 20px;
+					}
+					.x div{
+					  font-size: 20px;
+					}
+					.x a{
+					  color: #fff;
+					  background-color: #657786; 
+					  padding: 10px 20px;
+					  letter-spacing: 0.05em;
+					  text-decoration: none;
+					  font-size: 18px;
+					  border-radius: 5px;
+					}
+	    	</style>
+    		<div class="note"><img src="coffee-icon.svg" alt="" width="25px"><span>Please help me keep this website ad free. <a href="https://ko-fi.com/amp4cc" target="_blank"> Tip me for a coffee</a> and bookmark this site if you like it.</span></div>
+        <div class="converter-box">
+        	<form class="converter-input-box">
+        		<div class="converter-input">
+        			<div class="input-text">
+        				<span>Enter YouTube Video URL</span>
+        			</div>
+        			<input id="input-url" type="text" placeholder="https://www.youtube.com/watch?v=r39bqo510g">
+        			<!--<div>Site is currently being upgraded. Service may be experiencing interuptions.</div>-->
+        			<div class="converter-alert hidden"><span class="alert-text"></span></div>
+        		</div>
+        		<label class="converter-button-container">
+      				<img src="search-icon.svg" alt="" width="20px">
+      				<input id="convert-button" class="button" type="submit" value="Search">
+      			</label>
+        	</form>
+        	<div id="conversion-processing" class="hidden">
+        		<div class="animation-box">
+	        		<img src="converter-icon.svg" alt="" width="50px">
+	        		<span>Preparing video...</span>
+        		</div>
+        		<div class="conversion-processing-note"></div>
+        	</div>
+        	<div id="conversion-options" class="hidden">
+        		<div class="conversion-info-card">
+        			<img class="conversion-info-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        			<h1 class="conversion-info-title"><span class="content"></span></h1>
+        			<div class="conversion-info-uploader"></div>
+        			<div class="conversion-info-duration"></div>
+        		</div>
+        		<div class="conversion-download-card">
+        			<div class="download-format-options">
+        				<div id="mp4-option" class="download-format-option selected">MP4</div>
+        				<div id="webm-option" class="download-format-option">WEBM</div>	
+        			</div>
+        			<div class="download-format-qualities">
+        				<div class="qualities-descripton">Select video quality</div>
+        				<div id="mp4-qualities" class="qualities-box"></div>
+        				<div id="webm-qualities" class="qualities-box hidden"></div>
+        			</div>
+        			<div class="conversion-options-note">4k videos are currently not available to download. We are working to upgrade the service to support 4k videos.</div>
+        			<style>
+        				.conversion-options-note{
+        					padding: 20px;
+        					text-align: center;
+        					color: var(--text-color);
+        				}
+        				#conversion-options{
+        					display: flex;
+							    flex-direction: column;
+							    justify-content: center;
+							    align-items: center;
+        				}
+        			</style>
+        		</div>
+        	</div>
+        	<div id="download-processing" class="hidden">
+        		<div class="animation-box">
+	        		<img src="converter-icon.svg" alt="" width="50px">
+	        		<span>Downloading video...</span>
+        		</div>
+        		<div class="progress-bar">
+        			<div class="progress"></div>
+        			<span class="progress-container"><span class="progress-percent">0</span>%</span>
+        		</div>
+        		<style>
+        			.progress-bar{
+        				display: flex;
+        				align-items: center;
+        				justify-content: center;
+        				position: relative;
+        				width: 260px;
+    						height: 30px;
+        				background-color: var(--progress-bar-background);
+        				letter-spacing: 2px;
+        				font-size: 16px;
+        				color: #f8f8f8;
+        			}
+        			.progress-container{
+        				position: relative;
+        				z-index: 1;
+        			}
+        			.progress{
+        				position: absolute;
+        				top: 0;
+        				left: 0;
+        				height: 100%;
+        				background-color: var(--progress-bar);
+        				transition: width 980ms;
+        			}
+        		</style>
+        		<div id="conversion-processing-card">
+      				<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="card-thumbnail empty">
+        			<div class="card-title empty"><span class="content"></span></div>
+        			<div class="card-duration empty"></div>
+        		</div>
+        	</div>
+        	<div id="conversion-finished" class="hidden">
+        		<h1></h1>
+        		<div id="conversion-finished-buttons">
+	        		<a id="download-button" class="button download" href="" download=""><img src="download-icon.svg" alt="" width="25px">DOWNLOAD</a>
+	        		<style>
+	        			#download-button.disabled{
+	        				pointer-events: none;
+	        				background-color: #3f477c;
+	        			}
+	        		</style>
+	        		<a class="button coffee" href="Ko-fi.com/broyeah" target="_blank"><img src="coffee-icon.svg" alt="" width="25px">Buy me a coffee</a>
+	        		<a id="convert-another-button" class="button convert-another" href=""><img src="converter-icon.svg" alt="" width="23px">Download Another</a>
+        		</div>
+        		<div class="conversion-finished-notice">Files are deleted from server cache after downloading.</div>
+        	</div>
+        </div>
+      	<div id="upcoming" class="upcoming-services">
+
+      		<div id="aicg" class="upcoming-service hidden">
+      			<div class="upcoming-service-title">AI Clip Generator - Turn your videos into shorts / reels / tiktoks in seconds</div>
+      			<div>Join the waitlist, get the early access and benefits!</div>
+      			<button class="open-signup">Get Early Access!</button>
+      		</div>
+
+      		<div id="vtc" class="upcoming-service hidden">
+      			<div class="upcoming-service-title">Video Transcoder and Converter!</div>
+      			<div>Join the waitlist, get the early access and benefits!</div>
+      			<button class="open-signup">Get Early Access!</button>
+      		</div>
+
+      		<div id="aiiu" class="upcoming-service hidden">
+      			<div class="upcoming-service-title">AI Image Upscaler - Upscale your low resolution images and make them stand out!</div>
+      			<div>Join the waitlist, get the early access and benefits!</div>
+      			<button class="open-signup">Get Early Access!</button>
+      		</div>
+
+      		<div id="amp4p" class="upcoming-service hidden">
+      			<div class="upcoming-service-title">AMP4 Premium - Convert longer videos up to 12 hours, with 4k resolution, faster then ever!</div>
+      			<div>Join the waitlist, get the early access and benefits!</div>
+      			<button class="open-signup">Get Early Access!</button>
+      		</div>
+
+      		<div id="bicc" class="upcoming-service hidden">
+      			<div class="upcoming-service-title">Bulk image converter and editor - edit and convert your images in bulk!</div>
+      			<div>Join the waitlist, get the early access and benefits!</div>
+      			<button class="open-signup">Get Early Access!</button>
+      		</div>
+
+      	</div>
+      	<style>
+      		.upcoming-services{
+      			display: flex;
+      			flex-direction: column;
+      			justify-content: center;
+      			align-items: center;
+      			text-align: center;
+      			gap: 10px;
+      		}
+      		.upcoming-service{
+      			margin-top: 50px;
+      		}
+      		.upcoming-service.hidden{
+      			display: none;
+      		}
+      		.upcoming-service-title{
+      			margin-bottom: 10px;
+      			font-size: 20px;
+      		}
+      		.open-signup{
+      			background-color: #dd3474;
+      			padding: 10px 15px;
+      			font-size: 20px;
+      			margin-top: 15px;
+      			color: #fff;
+      			border: none;
+      			outline: none;
+      			border-radius: 5px;
+      		}
+      		#open-signup:hover{
+      			cursor: pointer;
+      			background-color: #e25288;
+      			transform: scale(1.05);
+      		}
+      	</style>
+      	
+	    </section>
+	    <section class="content-second">
+	    	<div>
+	    		<p style="text-align: center; margin-bottom: 20px">If you like my website, feel free to share it:</p>
+	    		<div style="margin-top: 20px" class="sharethis-inline-share-buttons"></div>
+	    	</div>
+	    	<div>
+	    		<p style="text-align: center; margin-bottom: 20px">Need to download a YouTube video MP3 audio? Check out my AMP3 YouTube to MP3 converter with playlist support:</p>
+	    		<a href="https://amp3.cc" class="image-light"><img style="width: 200px" class="site-logo" alt="AMP3 Website logo" src="amp3-logo.png"></a>
+					<a href="https://amp3.cc" class="image-dark hidden"><img style="width: 200px" class="site-logo" alt="AMP3 Website logo" src="amp3-logo-dark.png"></a>
+	    	</div>
+	    	<div>
+	    		<p style="text-align: center; margin-bottom: 20px">Need to download a YouTube video M4A audio? Check out my AM4A YouTube to M4A converter with playlist support:</p>
+	    		<a href="https://am4a.cc" class="image-light"><img style="width: 200px" class="site-logo" alt="AM4A Website logo" src="am4a-site-logo.png"></a>
+					<a href="https://am4a.cc" class="image-dark hidden"><img style="width: 200px" class="site-logo" alt="AM4A Website logo" src="am4a-site-logo-dark.png"></a>
+	    	</div>
+	    	<div>
+	    		<h2>What is YouTube to MP4 Converter</h2>
+	    		<p>A YouTube to MP4 converter is a tool which allows you to download videos from YouTube.com and save it in MP4 format. That way you can play YouTube videos on your device offline and where you can't access the YouTube. Our YouTube to MP4 Converter is free to use. You can download anything from YouTube in MP4 format simply by copy and pasting an URL from YouTube video.</p>
+	    	</div>
+	    	<div>
+	    		<h2>Why to use AMP4 YouTube to MP4 converter</h2>
+	    		<p>AMP4 converter is fast and free to use. It offers you different quality and format selection. Videos are supported for up to 180 minutes in length (3 hours). There is no need for users to register or login to convert and download YouTube videos to MP4. AMP4 converter is ad-free, that means that there are no ads on the page - because we all know how annoying ads can be. It is totally safe to use, without any bloat or viruses. I also don't collect any kind user information. Thats why AMP4 is one of the best and safest YouTube to MP4 converters out there. Since I don't make any money from ads, I would really appreciate any donations to cover the server cost, so I can keep it ad-free. Link for donations with Ko-fi: <a href="https://ko-fi.com/amp4cc">Ko-fi donations</a> If you like AMP4 converter, please bookmark it.</p>
+	    	</div>
+	    	<div>
+	    		<h2>How to use AMP4 YouTube to MP4 Converter</h2>
+	    		<p>
+	    			<ol>
+	    				<li>You visit YouTube.com and find any kind of video, which you would like to convert to MP4. You then copy the video URL from the upper URL bar in your browser. If you are on Android phone or an iPhone, you click share icon bellow the video, and then click on copy link button.</li>
+	    				<li>You then go to my website and paste the copied URL to the input field.</li>
+	    				<li>Then you click "Search", to query and find the video</li>
+	    				<li>When the video is found and queried, next, you select the quality and format of your MP4 file. When you have selected quality and format of the video, you click on the "Convert" button and your conversion will start.</li>
+	    				<li>When the conversion is finished, a download button will appear. You click on this button, and your video will start to download. You can then click on Convert another button, to convert / download another YouTube video.</li>
+	    			</ol>
+	    		</p>
+	    	</div>
+	    </section>
+    </main>
+	<footer>
+		<div class="footer-content">
+  <div>©2024 amp4.cc</div>
+  <div class="logos-footer">
+    <a href="https://amp4.cc" class="image-dark hidden"><img class="site-logo" alt="Website logo" src="https://amp4.cc/amp4-site-logo-white.png"></a>
+    <a href="https://amp3.cc" class="image-dark hidden"><img class="site-logo" alt="AMP3 website logo" src="https://amp4.cc/amp3-logo-white.png"></a>
+    <a href="https://am4a.cc" class="image-dark hidden"><img class="site-logo" alt="AM4A website logo" src="https://amp4.cc/am4a-site-logo-white.png"></a>
+  </div>
+  <div id="terms">
+    <a href="/contact">Contact</a>
+    <a href="/copyright-claims">Copyright claims</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms-of-use">Terms of Use</a>
+  </div>
+</div>		<style>
+			.logos-footer{
+				display: flex;
+				gap: 10px;
+				justify-content: center;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+			.logos-footer img{
+				width: 160px;
+			}
+		</style>
+	</footer>
+  </body>
+</html>
